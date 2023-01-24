@@ -82,7 +82,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     height: 20,
                   ),
                   const Text(
-                    "編集内容がすべて失われてしまします。",
+                    "編集内容がすべて失われてしまいます。",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
