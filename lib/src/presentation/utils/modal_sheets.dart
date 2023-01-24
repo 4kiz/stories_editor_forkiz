@@ -68,19 +68,21 @@ Future<bool> exitDialog({required context, required contentKey}) async {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Text(
-                    'Discard Edits?',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        letterSpacing: 0.5),
+                  const FittedBox(
+                    child: Text(
+                      '編集内容を破棄しますか？',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          letterSpacing: 0.5),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
-                    "If you go back now, you'll lose all the edits you've made.",
+                    "編集内容がすべて失われてしまします。",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -99,7 +101,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       Navigator.of(context).pop(true);
                     },
                     child: Text(
-                      'Discard',
+                      '中断',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.redAccent.shade200,
@@ -141,7 +143,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       }
                     },
                     child: const Text(
-                      'Save Draft',
+                      '下書き保存',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
@@ -163,7 +165,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       Navigator.of(context).pop(false);
                     },
                     child: const Text(
-                      'Cancel',
+                      'キャンセル',
                       style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,

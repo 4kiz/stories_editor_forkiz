@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:stories_editor/stories_editor.dart';
 
@@ -35,23 +36,57 @@ class _ExampleState extends State<Example> {
         backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
         body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
                       builder: (context) => StoriesEditor(
-                            giphyKey: 'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
-                            //fontFamilyList: const ['Shizuru', 'Aladin'],
-                            galleryThumbnailQuality: 300,
-                            //isCustomFontList: true,
-                            onDone: (uri) {
-                              debugPrint(uri);
-                              Share.shareFiles([uri]);
-                            },
-                          )));
-            },
-            child: const Text('Open Stories Editor'),
+                        giphyKey: 'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                        //fontFamilyList: const ['Shizuru', 'Aladin'],
+                        galleryThumbnailQuality: 300,
+                        //isCustomFontList: true,
+                        onDone: (uri) {
+                          debugPrint(uri);
+                          Share.shareFiles([uri]);
+                        },
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('Open Stories Editor'),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () async {
+                  final picker = ImagePicker();
+                  final image =
+                      await picker.pickImage(source: ImageSource.gallery);
+                  if (image != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoriesEditor(
+                          giphyKey: 'C4dMA7Q19nqEGdpfj82T8ssbOeZIylD4',
+                          //fontFamilyList: const ['Shizuru', 'Aladin'],
+                          galleryThumbnailQuality: 300,
+                          //isCustomFontList: true,
+                          onDone: (uri) {
+                            debugPrint(uri);
+                            Share.shareFiles([uri]);
+                          },
+                          initialImagePath: image.path,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('起動時に写真あり'),
+              ),
+            ],
           ),
         ));
   }
