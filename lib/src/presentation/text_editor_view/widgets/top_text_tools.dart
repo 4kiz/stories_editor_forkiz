@@ -65,21 +65,21 @@ class TopTextTools extends StatelessWidget {
                   ),
 
                   /// background color
-                  ToolButton(
-                    onTap: editorNotifier.onBackGroundChange,
-                    child: Transform.scale(
-                        scale: 0.7,
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 5, bottom: 3),
-                            child: ImageIcon(
-                              AssetImage('assets/icons/font_backGround.png',
-                                  package: 'stories_editor'),
-                              color: Colors.white,
-                            ),
-                          ),
-                        )),
-                  ),
+                  // ToolButton(
+                  //   onTap: editorNotifier.onBackGroundChange,
+                  //   child: Transform.scale(
+                  //       scale: 0.7,
+                  //       child: const Center(
+                  //         child: Padding(
+                  //           padding: EdgeInsets.only(left: 5, bottom: 3),
+                  //           child: ImageIcon(
+                  //             AssetImage('assets/icons/font_backGround.png',
+                  //                 package: 'stories_editor'),
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //       )),
+                  // ),
                   // ToolButton(
                   //   onTap: () {
                   //     editorNotifier.isTextAnimation =
@@ -142,7 +142,7 @@ class TopTextTools extends StatelessWidget {
                         'かんりょう',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 10,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

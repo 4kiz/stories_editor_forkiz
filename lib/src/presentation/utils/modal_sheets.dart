@@ -53,8 +53,6 @@ Future<bool> exitDialog({required context, required contentKey}) async {
             child: Container(
               padding: const EdgeInsets.only(
                   top: 25, bottom: 5, right: 20, left: 20),
-              alignment: Alignment.center,
-              height: 280,
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: HexColor.fromHex('#262626'),
@@ -70,19 +68,18 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                 children: <Widget>[
                   const FittedBox(
                     child: Text(
-                      '編集内容を破棄しますか？',
+                      '編集(へんしゅう)を止(や)めますか？',
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          letterSpacing: 0.5),
+                          color: Colors.white),
                     ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
-                    "編集内容がすべて失われてしまいます。",
+                    "編集内容(へんしゅうないよう)がすべて消(き)えます。",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -91,7 +88,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
 
                   /// discard
@@ -101,9 +98,9 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       Navigator.of(context).pop(true);
                     },
                     child: Text(
-                      '中断',
+                      'はい',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.redAccent.shade200,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.1),
@@ -143,9 +140,9 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       }
                     },
                     child: const Text(
-                      '下書き保存',
+                      '写真(しゃしん)に保存(ほぞん)',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5),
@@ -167,12 +164,15 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     child: const Text(
                       'キャンセル',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5),
                       textAlign: TextAlign.center,
                     ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),
