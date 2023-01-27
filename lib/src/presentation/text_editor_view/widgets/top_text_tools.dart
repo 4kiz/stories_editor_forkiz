@@ -65,62 +65,62 @@ class TopTextTools extends StatelessWidget {
                   ),
 
                   /// background color
-                  ToolButton(
-                    onTap: editorNotifier.onBackGroundChange,
-                    child: Transform.scale(
-                        scale: 0.7,
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 5, bottom: 3),
-                            child: ImageIcon(
-                              AssetImage('assets/icons/font_backGround.png',
-                                  package: 'stories_editor'),
-                              color: Colors.white,
-                            ),
-                          ),
-                        )),
-                  ),
-                  ToolButton(
-                    onTap: () {
-                      editorNotifier.isTextAnimation =
-                          !editorNotifier.isTextAnimation;
+                  // ToolButton(
+                  //   onTap: editorNotifier.onBackGroundChange,
+                  //   child: Transform.scale(
+                  //       scale: 0.7,
+                  //       child: const Center(
+                  //         child: Padding(
+                  //           padding: EdgeInsets.only(left: 5, bottom: 3),
+                  //           child: ImageIcon(
+                  //             AssetImage('assets/icons/font_backGround.png',
+                  //                 package: 'stories_editor'),
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //       )),
+                  // ),
+                  // ToolButton(
+                  //   onTap: () {
+                  //     editorNotifier.isTextAnimation =
+                  //         !editorNotifier.isTextAnimation;
 
-                      /// animate to selected animation page
-                      if (editorNotifier.isTextAnimation) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          if (editorNotifier
-                              .textAnimationController.hasClients) {
-                            editorNotifier.textAnimationController
-                                .animateToPage(
-                                    editorNotifier.fontAnimationIndex,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeIn);
-                          }
-                        });
-                      } else {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          if (editorNotifier.fontFamilyController.hasClients) {
-                            editorNotifier.fontFamilyController.animateToPage(
-                                editorNotifier.fontFamilyIndex,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeIn);
-                          }
-                        });
-                      }
-                    },
-                    child: Transform.scale(
-                        scale: 0.7,
-                        child: const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(0),
-                            child: ImageIcon(
-                              AssetImage('assets/icons/video_trim.png',
-                                  package: 'stories_editor'),
-                              color: Colors.white,
-                            ),
-                          ),
-                        )),
-                  )
+                  //     /// animate to selected animation page
+                  //     if (editorNotifier.isTextAnimation) {
+                  //       WidgetsBinding.instance.addPostFrameCallback((_) {
+                  //         if (editorNotifier
+                  //             .textAnimationController.hasClients) {
+                  //           editorNotifier.textAnimationController
+                  //               .animateToPage(
+                  //                   editorNotifier.fontAnimationIndex,
+                  //                   duration: const Duration(milliseconds: 300),
+                  //                   curve: Curves.easeIn);
+                  //         }
+                  //       });
+                  //     } else {
+                  //       WidgetsBinding.instance.addPostFrameCallback((_) {
+                  //         if (editorNotifier.fontFamilyController.hasClients) {
+                  //           editorNotifier.fontFamilyController.animateToPage(
+                  //               editorNotifier.fontFamilyIndex,
+                  //               duration: const Duration(milliseconds: 300),
+                  //               curve: Curves.easeIn);
+                  //         }
+                  //       });
+                  //     }
+                  //   },
+                  //   child: Transform.scale(
+                  //       scale: 0.7,
+                  //       child: const Center(
+                  //         child: Padding(
+                  //           padding: EdgeInsets.all(0),
+                  //           child: ImageIcon(
+                  //             AssetImage('assets/icons/video_trim.png',
+                  //                 package: 'stories_editor'),
+                  //             color: Colors.white,
+                  //           ),
+                  //         ),
+                  //       )),
+                  // )
                 ],
               ),
 
@@ -139,10 +139,10 @@ class TopTextTools extends StatelessWidget {
                           border: Border.all(color: Colors.white, width: 1.5),
                           borderRadius: BorderRadius.circular(15)),
                       child: const Text(
-                        'Done',
+                        'かんりょう',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 15,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),

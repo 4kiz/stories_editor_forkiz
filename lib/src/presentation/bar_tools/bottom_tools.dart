@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gallery_media_picker/gallery_media_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:stories_editor/src/domain/models/editable_items.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
+import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 
 class BottomTools extends StatelessWidget {
@@ -46,14 +49,18 @@ class BottomTools extends StatelessWidget {
                             ? ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: GestureDetector(
-                                  onTap: () {
-                                    /// scroll to gridView page
-                                    if (controlNotifier.mediaPath.isEmpty) {
-                                      scrollNotifier.pageController
-                                          .animateToPage(1,
-                                              duration: const Duration(
-                                                  milliseconds: 300),
-                                              curve: Curves.ease);
+                                  onTap: () async {
+                                    final picker = ImagePicker();
+                                    final image = await picker.pickImage(
+                                        source: ImageSource.gallery);
+                                    controlNotifier.mediaPath = image!.path;
+                                    if (controlNotifier.mediaPath.isNotEmpty) {
+                                      itemNotifier.draggableWidget.insert(
+                                        0,
+                                        EditableItem()
+                                          ..type = ItemType.image
+                                          ..position = const Offset(0.0, 0),
+                                      );
                                     }
                                   },
                                   child: const CoverThumbnail(
@@ -94,30 +101,6 @@ class BottomTools extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           child: controlNotifier.middleBottomWidget),
                     ),
-                  )
-                else
-                  Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            'assets/images/instagram_logo.png',
-                            package: 'stories_editor',
-                            color: Colors.white,
-                            height: 42,
-                          ),
-                          const Text(
-                            'Stories Creator',
-                            style: TextStyle(
-                                color: Colors.white38,
-                                letterSpacing: 1.5,
-                                fontSize: 9.2,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
 
                 /// save final image to gallery
@@ -152,7 +135,7 @@ class BottomTools extends StatelessWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: const [
                                       Text(
-                                        'Share',
+                                        'とうこうする',
                                         style: TextStyle(
                                             color: Colors.white,
                                             letterSpacing: 1.5,

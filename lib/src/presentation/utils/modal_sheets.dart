@@ -53,8 +53,6 @@ Future<bool> exitDialog({required context, required contentKey}) async {
             child: Container(
               padding: const EdgeInsets.only(
                   top: 25, bottom: 5, right: 20, left: 20),
-              alignment: Alignment.center,
-              height: 280,
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: HexColor.fromHex('#262626'),
@@ -68,19 +66,20 @@ Future<bool> exitDialog({required context, required contentKey}) async {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  const Text(
-                    'Discard Edits?',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        letterSpacing: 0.5),
+                  const FittedBox(
+                    child: Text(
+                      '編集(へんしゅう)を止(や)めますか？',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   const Text(
-                    "If you go back now, you'll lose all the edits you've made.",
+                    "編集内容(へんしゅうないよう)がすべて消(き)えます。",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
@@ -89,7 +88,7 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
 
                   /// discard
@@ -99,9 +98,9 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       Navigator.of(context).pop(true);
                     },
                     child: Text(
-                      'Discard',
+                      'はい',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.redAccent.shade200,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.1),
@@ -141,9 +140,9 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       }
                     },
                     child: const Text(
-                      'Save Draft',
+                      '写真(しゃしん)に保存(ほぞん)',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5),
@@ -163,14 +162,17 @@ Future<bool> exitDialog({required context, required contentKey}) async {
                       Navigator.of(context).pop(false);
                     },
                     child: const Text(
-                      'Cancel',
+                      'キャンセル',
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5),
                       textAlign: TextAlign.center,
                     ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),

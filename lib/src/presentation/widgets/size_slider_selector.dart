@@ -28,11 +28,14 @@ class _SizeSliderWidgetState extends State<SizeSliderWidget> {
             /// custom paint
             AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                padding: EdgeInsets.only(right: _isChange ? 0 : 15),
-                width: _isChange ? 39 : 10,
+                width: _isChange ? 39 : 20,
                 height: 300,
                 child: CustomPaint(
-                  painter: RPSCustomPainter(),
+                  painter: RPSCustomPainter(
+                    !_showIndicator
+                        ? Colors.transparent
+                        : Colors.white.withOpacity(0.2),
+                  ),
                   size: Size(screenUtil.screenHeight,
                       (screenUtil.screenWidth).toDouble()),
                 )),
@@ -41,7 +44,7 @@ class _SizeSliderWidgetState extends State<SizeSliderWidget> {
             AnimatedContainer(
               padding: EdgeInsets.only(left: _isChange ? 1 : 1, right: 2.1),
               duration: const Duration(milliseconds: 300),
-              width: _isChange ? 39 : 15,
+              width: _isChange ? 39 : 20,
               height: 300,
               decoration: const BoxDecoration(),
               child: RotatedBox(
@@ -106,10 +109,14 @@ class _SizeSliderWidgetState extends State<SizeSliderWidget> {
 
 /// shape slider like instagram
 class RPSCustomPainter extends CustomPainter {
+  final Color customColor;
+
+  RPSCustomPainter(this.customColor);
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint0 = Paint()
-      ..color = Colors.white.withOpacity(0.2)
+      ..color = customColor
       ..style = PaintingStyle.fill
       ..strokeWidth = 1.0;
 
