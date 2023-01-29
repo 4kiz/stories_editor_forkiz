@@ -169,10 +169,10 @@ class _PaintingState extends State<Painting> {
                 _renderCurrentLine(context, paintingNotifier, controlNotifier),
 
                 /// select line width
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 140),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 140),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: SizeSliderWidget(),
                   ),
                 ),
