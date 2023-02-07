@@ -60,6 +60,8 @@ class MainView extends StatefulWidget {
 
   final String? initialImagePath;
 
+  final String? onDoneButtonTitle;
+
   MainView({
     Key? key,
     required this.giphyKey,
@@ -74,6 +76,7 @@ class MainView extends StatefulWidget {
     this.editorBackgroundColor,
     this.galleryThumbnailQuality,
     this.initialImagePath,
+    this.onDoneButtonTitle,
   }) : super(key: key);
 
   @override
@@ -359,6 +362,7 @@ class _MainViewState extends State<MainView> {
                       },
                       onDoneButtonStyle: widget.onDoneButtonStyle,
                       editorBackgroundColor: widget.editorBackgroundColor,
+                      onDoneButtonTitle: widget.onDoneButtonTitle,
                     ),
                 ],
               ),

@@ -15,7 +15,7 @@ class BottomTools extends StatefulWidget {
   final GlobalKey contentKey;
   final Function(String imageUri) onDone;
   final Widget? onDoneButtonStyle;
-  final String onDoneButtonTitle;
+  final String? onDoneButtonTitle;
 
   /// editor background color
   final Color? editorBackgroundColor;
@@ -36,7 +36,6 @@ class _BottomToolsState extends State<BottomTools> {
   var isLoading = false;
   @override
   Widget build(BuildContext context) {
-    print(isLoading);
     return Consumer3<ControlNotifier, ScrollNotifier, DraggableWidgetNotifier>(
       builder: (_, controlNotifier, scrollNotifier, itemNotifier, __) {
         return Container(
@@ -153,7 +152,7 @@ class _BottomToolsState extends State<BottomTools> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            widget.onDoneButtonTitle,
+                                            widget.onDoneButtonTitle ?? 'とうこうする',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 letterSpacing: 1.5,
