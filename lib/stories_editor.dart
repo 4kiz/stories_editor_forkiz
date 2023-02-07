@@ -52,6 +52,8 @@ class StoriesEditor extends StatefulWidget {
   /// To select a photo first and move it to the editor
   final String? initialImagePath;
 
+  final String? onDoneButtonTitle;
+
   const StoriesEditor({
     Key? key,
     required this.giphyKey,
@@ -66,6 +68,7 @@ class StoriesEditor extends StatefulWidget {
     this.editorBackgroundColor,
     this.galleryThumbnailQuality,
     this.initialImagePath,
+    this.onDoneButtonTitle,
   }) : super(key: key);
 
   @override
@@ -123,6 +126,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             editorBackgroundColor: widget.editorBackgroundColor,
             galleryThumbnailQuality: widget.galleryThumbnailQuality,
             initialImagePath: widget.initialImagePath,
+            onDoneButtonTitle: widget.onDoneButtonTitle,
           ),
         ),
       ),

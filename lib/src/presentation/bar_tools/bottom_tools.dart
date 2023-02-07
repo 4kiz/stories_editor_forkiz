@@ -11,21 +11,29 @@ import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
 import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 
-class BottomTools extends StatelessWidget {
+class BottomTools extends StatefulWidget {
   final GlobalKey contentKey;
   final Function(String imageUri) onDone;
   final Widget? onDoneButtonStyle;
+  final String? onDoneButtonTitle;
 
   /// editor background color
   final Color? editorBackgroundColor;
-  const BottomTools(
-      {Key? key,
-      required this.contentKey,
-      required this.onDone,
-      this.onDoneButtonStyle,
-      this.editorBackgroundColor})
-      : super(key: key);
+  const BottomTools({
+    Key? key,
+    required this.contentKey,
+    required this.onDone,
+    this.onDoneButtonStyle,
+    this.editorBackgroundColor,
+    this.onDoneButtonTitle = 'とうこうする',
+  }) : super(key: key);
 
+  @override
+  State<BottomTools> createState() => _BottomToolsState();
+}
+
+class _BottomToolsState extends State<BottomTools> {
+  var isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Consumer3<ControlNotifier, ScrollNotifier, DraggableWidgetNotifier>(
@@ -109,49 +117,58 @@ class BottomTools extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Transform.scale(
                       scale: 0.9,
-                      child: AnimatedOnTapButton(
-                          onTap: () async {
-                            String pngUri;
-                            await takePicture(
-                                    contentKey: contentKey,
-                                    context: context,
-                                    saveToGallery: false)
-                                .then((bytes) {
-                              if (bytes != null) {
-                                pngUri = bytes;
-                                onDone(pngUri);
-                              } else {}
-                            });
-                          },
-                          child: onDoneButtonStyle ??
-                              Container(
-                                padding: const EdgeInsets.only(
-                                    left: 12, right: 5, top: 4, bottom: 4),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                        color: Colors.white, width: 1.5)),
-                                child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: const [
-                                      Text(
-                                        'とうこうする',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            letterSpacing: 1.5,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 5),
-                                        child: Icon(
-                                          Icons.arrow_forward_ios,
-                                          color: Colors.white,
-                                          size: 15,
-                                        ),
-                                      ),
-                                    ]),
-                              )),
+                      child: isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : AnimatedOnTapButton(
+                              onTap: () async {
+                                setState(() {
+                                  isLoading = true;
+                                });
+
+                                String pngUri;
+                                await takePicture(
+                                        contentKey: widget.contentKey,
+                                        context: context,
+                                        saveToGallery: false)
+                                    .then((bytes) {
+                                  if (bytes != null) {
+                                    pngUri = bytes;
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                    widget.onDone(pngUri);
+                                  } else {}
+                                });
+                              },
+                              child: widget.onDoneButtonStyle ??
+                                  Container(
+                                    padding: const EdgeInsets.only(
+                                        left: 12, right: 5, top: 4, bottom: 4),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Border.all(
+                                            color: Colors.white, width: 1.5)),
+                                    child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            widget.onDoneButtonTitle ?? 'とうこうする',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                letterSpacing: 1.5,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 5),
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              color: Colors.white,
+                                              size: 15,
+                                            ),
+                                          ),
+                                        ]),
+                                  )),
                     ),
                   ),
                 ),
