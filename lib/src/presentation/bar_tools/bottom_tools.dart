@@ -133,10 +133,10 @@ class _BottomToolsState extends State<BottomTools> {
                                     .then((bytes) {
                                   if (bytes != null) {
                                     pngUri = bytes;
+                                    widget.onDone(pngUri);
                                     setState(() {
                                       isLoading = false;
                                     });
-                                    widget.onDone(pngUri);
                                   } else {}
                                 });
                               },
@@ -152,7 +152,8 @@ class _BottomToolsState extends State<BottomTools> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            widget.onDoneButtonTitle ?? 'とうこうする',
+                                            widget.onDoneButtonTitle ??
+                                                'とうこうする',
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 letterSpacing: 1.5,

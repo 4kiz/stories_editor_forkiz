@@ -47,7 +47,7 @@ class _TopToolsState extends State<TopTools> {
                           context: widget.context,
                           contentKey: widget.contentKey);
                       if (res) {
-                        Navigator.pop(context);
+                        Navigator.pop(context, true);
                       }
                     }),
                 if (controlNotifier.mediaPath.isEmpty)
