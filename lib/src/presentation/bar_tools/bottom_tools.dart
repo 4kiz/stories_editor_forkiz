@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gallery_media_picker/gallery_media_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/models/editable_items.dart';
@@ -71,8 +70,9 @@ class _BottomToolsState extends State<BottomTools> {
                                       );
                                     }
                                   },
-                                  child: const CoverThumbnail(
-                                    thumbnailQuality: 150,
+                                  child: const Icon(
+                                    Icons.photo_library_outlined,
+                                    color: Colors.white,
                                   ),
                                 ))
 
