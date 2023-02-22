@@ -32,7 +32,7 @@ class StoriesEditor extends StatefulWidget {
   final Widget? middleBottomWidget;
 
   /// on done
-  final Function(String)? onDone;
+  final Function(String, bool)? onDone;
 
   /// on done button Text
   final Widget? onDoneButtonStyle;
@@ -54,6 +54,8 @@ class StoriesEditor extends StatefulWidget {
 
   final String? onDoneButtonTitle;
 
+  final bool showAddImageButton;
+
   const StoriesEditor({
     Key? key,
     required this.giphyKey,
@@ -69,6 +71,7 @@ class StoriesEditor extends StatefulWidget {
     this.galleryThumbnailQuality,
     this.initialImagePath,
     this.onDoneButtonTitle,
+    this.showAddImageButton = false,
   }) : super(key: key);
 
   @override
@@ -127,6 +130,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             galleryThumbnailQuality: widget.galleryThumbnailQuality,
             initialImagePath: widget.initialImagePath,
             onDoneButtonTitle: widget.onDoneButtonTitle,
+            showAddImageButton: widget.showAddImageButton,
           ),
         ),
       ),

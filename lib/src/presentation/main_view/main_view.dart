@@ -41,7 +41,7 @@ class MainView extends StatefulWidget {
   final Widget? middleBottomWidget;
 
   /// on done
-  final Function(String)? onDone;
+  final Function(String, bool)? onDone;
 
   /// on done button Text
   final Widget? onDoneButtonStyle;
@@ -62,6 +62,8 @@ class MainView extends StatefulWidget {
 
   final String? onDoneButtonTitle;
 
+  final bool showAddImageButton;
+
   MainView({
     Key? key,
     required this.giphyKey,
@@ -77,6 +79,7 @@ class MainView extends StatefulWidget {
     this.galleryThumbnailQuality,
     this.initialImagePath,
     this.onDoneButtonTitle,
+    required this.showAddImageButton,
   }) : super(key: key);
 
   @override
@@ -355,14 +358,15 @@ class _MainViewState extends State<MainView> {
                   if (!kIsWeb)
                     BottomTools(
                       contentKey: contentKey,
-                      onDone: (bytes) {
+                      onDone: (bytes, nextEdit) {
                         setState(() {
-                          widget.onDone!(bytes);
+                          widget.onDone!(bytes, nextEdit);
                         });
                       },
                       onDoneButtonStyle: widget.onDoneButtonStyle,
                       editorBackgroundColor: widget.editorBackgroundColor,
                       onDoneButtonTitle: widget.onDoneButtonTitle,
+                      showAddImageButton: widget.showAddImageButton,
                     ),
                 ],
               ),
