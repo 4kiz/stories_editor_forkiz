@@ -49,8 +49,9 @@ class _ExampleState extends State<Example> {
                         //fontFamilyList: const ['Shizuru', 'Aladin'],
                         galleryThumbnailQuality: 300,
                         //isCustomFontList: true,
-                        onDone: (uri) {
+                        onDone: (uri, nextEdit) {
                           debugPrint(uri);
+                          debugPrint(nextEdit.toString());
                           Share.shareFiles([uri]);
                         },
                       ),
@@ -74,8 +75,9 @@ class _ExampleState extends State<Example> {
                           //fontFamilyList: const ['Shizuru', 'Aladin'],
                           galleryThumbnailQuality: 300,
                           //isCustomFontList: true,
-                          onDone: (uri) {
+                          onDone: (uri, nextEdit) {
                             debugPrint(uri);
+                            debugPrint(nextEdit.toString());
                             Share.shareFiles([uri]);
                           },
                           initialImagePath: image.path,
