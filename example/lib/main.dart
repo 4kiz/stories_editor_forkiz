@@ -54,7 +54,6 @@ class _ExampleState extends State<Example> {
                           debugPrint(nextEdit.toString());
                           Share.shareFiles([uri]);
                         },
-                        showAddImageButton: true,
                       ),
                     ),
                   );

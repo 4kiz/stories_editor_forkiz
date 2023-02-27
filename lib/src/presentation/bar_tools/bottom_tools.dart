@@ -15,7 +15,7 @@ class BottomTools extends StatefulWidget {
   final Function(String imageUri, bool nextEdit) onDone;
   final Widget? onDoneButtonStyle;
   final String? onDoneButtonTitle;
-  final bool? showAddImageButton;
+  final String? showAddImageButtonTitle;
 
   /// editor background color
   final Color? editorBackgroundColor;
@@ -25,8 +25,8 @@ class BottomTools extends StatefulWidget {
     required this.onDone,
     this.onDoneButtonStyle,
     this.editorBackgroundColor,
-    this.onDoneButtonTitle = 'とうこうする',
-    required this.showAddImageButton,
+    this.onDoneButtonTitle,
+    this.showAddImageButtonTitle,
   }) : super(key: key);
 
   @override
@@ -116,7 +116,7 @@ class _BottomToolsState extends State<BottomTools> {
                     ? const CircularProgressIndicator(color: Colors.white)
                     : Row(
                         children: [
-                          if (widget.showAddImageButton == true)
+                          if (widget.showAddImageButtonTitle != null)
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: AnimatedOnTapButton(
@@ -134,15 +134,16 @@ class _BottomToolsState extends State<BottomTools> {
                                           color: Colors.white, width: 1.5)),
                                   child: Row(
                                       mainAxisSize: MainAxisSize.min,
-                                      children: const [
+                                      children: [
                                         Text(
-                                          'ついか',
-                                          style: TextStyle(
+                                          widget.showAddImageButtonTitle ??
+                                              'ついか',
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
-                                        Padding(
+                                        const Padding(
                                           padding: EdgeInsets.only(left: 5),
                                           child: Icon(
                                             Icons.add,

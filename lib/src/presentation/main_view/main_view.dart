@@ -62,7 +62,7 @@ class MainView extends StatefulWidget {
 
   final String? onDoneButtonTitle;
 
-  final bool? showAddImageButton;
+  final String? showAddImageButtonTitle;
 
   MainView({
     Key? key,
@@ -79,7 +79,7 @@ class MainView extends StatefulWidget {
     this.galleryThumbnailQuality,
     this.initialImagePath,
     this.onDoneButtonTitle,
-    required this.showAddImageButton,
+    required this.showAddImageButtonTitle,
   }) : super(key: key);
 
   @override
@@ -366,7 +366,7 @@ class _MainViewState extends State<MainView> {
                       onDoneButtonStyle: widget.onDoneButtonStyle,
                       editorBackgroundColor: widget.editorBackgroundColor,
                       onDoneButtonTitle: widget.onDoneButtonTitle,
-                      showAddImageButton: widget.showAddImageButton,
+                      showAddImageButtonTitle: widget.showAddImageButtonTitle,
                     ),
                 ],
               ),
