@@ -54,7 +54,7 @@ class StoriesEditor extends StatefulWidget {
 
   final String? onDoneButtonTitle;
 
-  final bool showAddImageButton;
+  final bool? showAddImageButton;
 
   const StoriesEditor({
     Key? key,
@@ -71,7 +71,7 @@ class StoriesEditor extends StatefulWidget {
     this.galleryThumbnailQuality,
     this.initialImagePath,
     this.onDoneButtonTitle,
-    this.showAddImageButton = false,
+    this.showAddImageButton,
   }) : super(key: key);
 
   @override

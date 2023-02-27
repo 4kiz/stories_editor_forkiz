@@ -15,7 +15,7 @@ class BottomTools extends StatefulWidget {
   final Function(String imageUri, bool nextEdit) onDone;
   final Widget? onDoneButtonStyle;
   final String? onDoneButtonTitle;
-  final bool showAddImageButton;
+  final bool? showAddImageButton;
 
   /// editor background color
   final Color? editorBackgroundColor;
@@ -116,7 +116,7 @@ class _BottomToolsState extends State<BottomTools> {
                     ? const CircularProgressIndicator(color: Colors.white)
                     : Row(
                         children: [
-                          if (widget.showAddImageButton)
+                          if (widget.showAddImageButton == true)
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: AnimatedOnTapButton(
@@ -136,7 +136,7 @@ class _BottomToolsState extends State<BottomTools> {
                                       mainAxisSize: MainAxisSize.min,
                                       children: const [
                                         Text(
-                                          'がぞうついか',
+                                          'ついか',
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w400,

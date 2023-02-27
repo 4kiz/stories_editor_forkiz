@@ -62,7 +62,7 @@ class MainView extends StatefulWidget {
 
   final String? onDoneButtonTitle;
 
-  final bool showAddImageButton;
+  final bool? showAddImageButton;
 
   MainView({
     Key? key,
