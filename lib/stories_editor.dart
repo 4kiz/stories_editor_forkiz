@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/gradient_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/keyboard_height_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
@@ -100,6 +101,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (overscroll) {
         overscroll.disallowIndicator();
@@ -115,23 +117,30 @@ class _StoriesEditorState extends State<StoriesEditor> {
             ChangeNotifierProvider(create: (_) => GradientNotifier()),
             ChangeNotifierProvider(create: (_) => PaintingNotifier()),
             ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
+            ChangeNotifierProvider(create: (_) => KeyboardHeightNotifier()),
           ],
-          child: MainView(
-            giphyKey: widget.giphyKey,
-            onDone: widget.onDone,
-            fontFamilyList: widget.fontFamilyList,
-            isCustomFontList: widget.isCustomFontList,
-            middleBottomWidget: widget.middleBottomWidget,
-            gradientColors: widget.gradientColors,
-            colorList: widget.colorList,
-            onDoneButtonStyle: widget.onDoneButtonStyle,
-            onBackPress: widget.onBackPress,
-            editorBackgroundColor: widget.editorBackgroundColor,
-            galleryThumbnailQuality: widget.galleryThumbnailQuality,
-            initialImagePath: widget.initialImagePath,
-            onDoneButtonTitle: widget.onDoneButtonTitle,
-            showAddImageButtonTitle: widget.showAddImageButtonTitle,
-          ),
+          child: Consumer<KeyboardHeightNotifier>(
+              builder: (context, keyboard, __) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              keyboard.keyboardHeight = keyboardHeight;
+            });
+            return MainView(
+              giphyKey: widget.giphyKey,
+              onDone: widget.onDone,
+              fontFamilyList: widget.fontFamilyList,
+              isCustomFontList: widget.isCustomFontList,
+              middleBottomWidget: widget.middleBottomWidget,
+              gradientColors: widget.gradientColors,
+              colorList: widget.colorList,
+              onDoneButtonStyle: widget.onDoneButtonStyle,
+              onBackPress: widget.onBackPress,
+              editorBackgroundColor: widget.editorBackgroundColor,
+              galleryThumbnailQuality: widget.galleryThumbnailQuality,
+              initialImagePath: widget.initialImagePath,
+              onDoneButtonTitle: widget.onDoneButtonTitle,
+              showAddImageButtonTitle: widget.showAddImageButtonTitle,
+            );
+          }),
         ),
       ),
     );

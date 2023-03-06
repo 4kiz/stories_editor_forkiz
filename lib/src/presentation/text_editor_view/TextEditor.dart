@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/models/editable_items.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/keyboard_height_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
 import 'package:stories_editor/src/presentation/text_editor_view/widgets/animation_selector.dart';
 import 'package:stories_editor/src/presentation/text_editor_view/widgets/font_selector.dart';
@@ -42,8 +43,10 @@ class _TextEditorState extends State<TextEditor> {
     final ScreenUtil screenUtil = ScreenUtil();
     return Material(
         color: Colors.transparent,
-        child: Consumer2<ControlNotifier, TextEditingNotifier>(
-          builder: (_, controlNotifier, editorNotifier, __) {
+        child: Consumer3<ControlNotifier, TextEditingNotifier,
+            KeyboardHeightNotifier>(
+          builder: (_, controlNotifier, editorNotifier, keyboardNotifier, __) {
+            print('--${keyboardNotifier.keyboardHeight}');
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: GestureDetector(
@@ -84,7 +87,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font family selector (bottom)
                         Positioned(
                           left: 40,
-                          bottom: screenUtil.screenHeight * 0.26,
+                          bottom: keyboardNotifier.keyboardHeight - 80,
                           child: Visibility(
                             visible: editorNotifier.isFontFamily &&
                                 !editorNotifier.isTextAnimation,
