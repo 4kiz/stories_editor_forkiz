@@ -45,7 +45,7 @@ class _TextEditorState extends State<TextEditor> {
       final colorOffsetIndex = widget.colorDefaultOffsetIndex;
       if (colorOffsetIndex != null) {
         _editorNotifier.textColor =
-            AppColors.defaultColors.length >= colorOffsetIndex
+            AppColors.defaultColors.length <= colorOffsetIndex
                 ? 0
                 : colorOffsetIndex;
       }
