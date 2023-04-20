@@ -53,9 +53,13 @@ class StoriesEditor extends StatefulWidget {
   /// To select a photo first and move it to the editor
   final String? initialImagePath;
 
+  final bool? isInitialImageLocked;
+
   final String? onDoneButtonTitle;
 
   final String? showAddImageButtonTitle;
+
+  final int? colorDefaultOffsetIndex;
 
   const StoriesEditor({
     Key? key,
@@ -71,8 +75,10 @@ class StoriesEditor extends StatefulWidget {
     this.editorBackgroundColor,
     this.galleryThumbnailQuality,
     this.initialImagePath,
+    this.isInitialImageLocked,
     this.onDoneButtonTitle,
     this.showAddImageButtonTitle,
+    this.colorDefaultOffsetIndex,
   }) : super(key: key);
 
   @override
@@ -137,8 +143,10 @@ class _StoriesEditorState extends State<StoriesEditor> {
               editorBackgroundColor: widget.editorBackgroundColor,
               galleryThumbnailQuality: widget.galleryThumbnailQuality,
               initialImagePath: widget.initialImagePath,
+              isInitialImageLocked: widget.isInitialImageLocked,
               onDoneButtonTitle: widget.onDoneButtonTitle,
               showAddImageButtonTitle: widget.showAddImageButtonTitle,
+              colorDefaultOffsetIndex: widget.colorDefaultOffsetIndex,
             );
           }),
         ),

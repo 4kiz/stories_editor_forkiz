@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -10,13 +12,19 @@ import 'package:stories_editor/src/presentation/text_editor_view/widgets/animati
 import 'package:stories_editor/src/presentation/text_editor_view/widgets/font_selector.dart';
 import 'package:stories_editor/src/presentation/text_editor_view/widgets/text_field_widget.dart';
 import 'package:stories_editor/src/presentation/text_editor_view/widgets/top_text_tools.dart';
+import 'package:stories_editor/src/presentation/utils/constants/app_colors.dart';
 import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/color_selector.dart';
 import 'package:stories_editor/src/presentation/widgets/size_slider_selector.dart';
 
 class TextEditor extends StatefulWidget {
   final BuildContext context;
-  const TextEditor({Key? key, required this.context}) : super(key: key);
+  final int? colorDefaultOffsetIndex;
+  const TextEditor({
+    Key? key,
+    required this.context,
+    this.colorDefaultOffsetIndex,
+  }) : super(key: key);
 
   @override
   State<TextEditor> createState() => _TextEditorState();
@@ -34,6 +42,13 @@ class _TextEditorState extends State<TextEditor> {
       _editorNotifier
         ..textController.text = _editorNotifier.text
         ..fontFamilyController = PageController(viewportFraction: .125);
+      final colorOffsetIndex = widget.colorDefaultOffsetIndex;
+      if (colorOffsetIndex != null) {
+        _editorNotifier.textColor =
+            AppColors.defaultColors.length >= colorOffsetIndex
+                ? 0
+                : colorOffsetIndex;
+      }
     });
     super.initState();
   }
@@ -46,12 +61,17 @@ class _TextEditorState extends State<TextEditor> {
         child: Consumer3<ControlNotifier, TextEditingNotifier,
             KeyboardHeightNotifier>(
           builder: (_, controlNotifier, editorNotifier, keyboardNotifier, __) {
-            print('--${keyboardNotifier.keyboardHeight}');
+            log('keyboard height: --${keyboardNotifier.keyboardHeight}');
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: GestureDetector(
                 /// onTap => Close view and create/modify item object
-                onTap: () => _onTap(context, controlNotifier, editorNotifier),
+                onTap: () => _onTap(
+                  context,
+                  controlNotifier,
+                  editorNotifier,
+                  keyboardNotifier,
+                ),
                 child: Container(
                     decoration:
                         BoxDecoration(color: Colors.black.withOpacity(0.5)),
@@ -60,8 +80,10 @@ class _TextEditorState extends State<TextEditor> {
                     child: Stack(
                       children: [
                         /// text field
-                        const Align(
-                          alignment: Alignment.center,
+                        const Positioned(
+                          top: 240,
+                          left: 0,
+                          right: 0,
                           child: TextFieldWidget(),
                         ),
 
@@ -80,7 +102,11 @@ class _TextEditorState extends State<TextEditor> {
                               alignment: Alignment.topCenter,
                               child: TopTextTools(
                                 onDone: () => _onTap(
-                                    context, controlNotifier, editorNotifier),
+                                  context,
+                                  controlNotifier,
+                                  editorNotifier,
+                                  keyboardNotifier,
+                                ),
                               )),
                         ),
 
@@ -104,7 +130,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font color selector (bottom)
                         Positioned(
                           left: 40,
-                          bottom: screenUtil.screenHeight * 0.26,
+                          bottom: keyboardNotifier.keyboardHeight - 80,
                           child: Visibility(
                               visible: !editorNotifier.isFontFamily &&
                                   !editorNotifier.isTextAnimation,
@@ -120,7 +146,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font animation selector (bottom
                         Positioned(
                           left: 40,
-                          bottom: screenUtil.screenHeight * 0.26,
+                          bottom: keyboardNotifier.keyboardHeight - 80,
                           child: Visibility(
                               visible: editorNotifier.isTextAnimation,
                               child: const Align(
@@ -139,8 +165,12 @@ class _TextEditorState extends State<TextEditor> {
         ));
   }
 
-  void _onTap(context, ControlNotifier controlNotifier,
-      TextEditingNotifier editorNotifier) {
+  void _onTap(
+    context,
+    ControlNotifier controlNotifier,
+    TextEditingNotifier editorNotifier,
+    KeyboardHeightNotifier keyboardHeightNotifier,
+  ) {
     final _editableItemNotifier =
         Provider.of<DraggableWidgetNotifier>(context, listen: false);
 
@@ -171,7 +201,7 @@ class _TextEditorState extends State<TextEditor> {
         ..textList = editorNotifier.textList
         ..animationType =
             editorNotifier.animationList[editorNotifier.fontAnimationIndex]
-        ..position = const Offset(0.0, 0.0));
+        ..position = const Offset(0.0, -0.1));
       editorNotifier.setDefaults();
       controlNotifier.isTextEditing = !controlNotifier.isTextEditing;
     } else {
