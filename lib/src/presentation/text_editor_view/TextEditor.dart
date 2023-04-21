@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -61,7 +59,6 @@ class _TextEditorState extends State<TextEditor> {
         child: Consumer3<ControlNotifier, TextEditingNotifier,
             KeyboardHeightNotifier>(
           builder: (_, controlNotifier, editorNotifier, keyboardNotifier, __) {
-            log('keyboard height: --${keyboardNotifier.keyboardHeight}');
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: GestureDetector(
