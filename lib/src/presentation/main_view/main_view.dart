@@ -68,6 +68,8 @@ class MainView extends StatefulWidget {
 
   final int? colorDefaultOffsetIndex;
 
+  final Color? placeholderColor;
+
   MainView({
     Key? key,
     required this.giphyKey,
@@ -86,6 +88,7 @@ class MainView extends StatefulWidget {
     this.onDoneButtonTitle,
     required this.showAddImageButtonTitle,
     this.colorDefaultOffsetIndex,
+    this.placeholderColor,
   }) : super(key: key);
 
   @override
@@ -304,27 +307,33 @@ class _MainViewState extends State<MainView> {
                         ),
 
                         /// middle text
-                        if (itemProvider.draggableWidget.isEmpty &&
+                        if (itemProvider.draggableWidget
+                                .where((e) => !e.isLock)
+                                .isEmpty &&
                             !controlNotifier.isTextEditing &&
                             paintingProvider.lines.isEmpty)
                           IgnorePointer(
                             ignoring: true,
                             child: Align(
                               alignment: const Alignment(0, -0.1),
-                              child: Text('タップしてにゅうりょく',
-                                  style: TextStyle(
-                                      fontFamily: 'Alegreya',
-                                      package: 'stories_editor',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 30,
-                                      color: Colors.white.withOpacity(0.5),
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                            offset: const Offset(1.0, 1.0),
-                                            blurRadius: 3.0,
-                                            color:
-                                                Colors.black45.withOpacity(0.3))
-                                      ])),
+                              child: Text(
+                                'タップしてにゅうりょく',
+                                style: TextStyle(
+                                  fontFamily: 'Alegreya',
+                                  package: 'stories_editor',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 30,
+                                  color: widget.placeholderColor ??
+                                      Colors.white.withOpacity(0.5),
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: const Offset(1.0, 1.0),
+                                      blurRadius: 3.0,
+                                      color: Colors.black45.withOpacity(0.3),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
 

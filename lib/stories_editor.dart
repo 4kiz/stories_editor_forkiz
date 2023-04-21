@@ -61,6 +61,8 @@ class StoriesEditor extends StatefulWidget {
 
   final int? colorDefaultOffsetIndex;
 
+  final Color? placeholderColor;
+
   const StoriesEditor({
     Key? key,
     required this.giphyKey,
@@ -79,6 +81,7 @@ class StoriesEditor extends StatefulWidget {
     this.onDoneButtonTitle,
     this.showAddImageButtonTitle,
     this.colorDefaultOffsetIndex,
+    this.placeholderColor,
   }) : super(key: key);
 
   @override
@@ -147,6 +150,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
               onDoneButtonTitle: widget.onDoneButtonTitle,
               showAddImageButtonTitle: widget.showAddImageButtonTitle,
               colorDefaultOffsetIndex: widget.colorDefaultOffsetIndex,
+              placeholderColor: widget.placeholderColor,
             );
           }),
         ),

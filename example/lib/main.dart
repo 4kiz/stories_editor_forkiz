@@ -83,6 +83,7 @@ class _ExampleState extends State<Example> {
                           initialImagePath: image.path,
                           isInitialImageLocked: true,
                           colorDefaultOffsetIndex: 7,
+                          placeholderColor: Colors.amber,
                         ),
                       ),
                     );
