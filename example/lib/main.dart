@@ -81,6 +81,9 @@ class _ExampleState extends State<Example> {
                             Share.shareFiles([uri]);
                           },
                           initialImagePath: image.path,
+                          isInitialImageLocked: true,
+                          colorDefaultOffsetIndex: 7,
+                          placeholderColor: Colors.amber,
                         ),
                       ),
                     );

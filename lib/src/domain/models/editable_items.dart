@@ -25,4 +25,7 @@ class EditableItem {
 
   /// Gif
   GiphyGif gif = GiphyGif(id: '0');
+
+  /// Lock
+  bool isLock = false;
 }

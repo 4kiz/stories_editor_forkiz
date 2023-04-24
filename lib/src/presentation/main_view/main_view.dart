@@ -60,9 +60,15 @@ class MainView extends StatefulWidget {
 
   final String? initialImagePath;
 
+  final bool? isInitialImageLocked;
+
   final String? onDoneButtonTitle;
 
   final String? showAddImageButtonTitle;
+
+  final int? colorDefaultOffsetIndex;
+
+  final Color? placeholderColor;
 
   MainView({
     Key? key,
@@ -78,8 +84,11 @@ class MainView extends StatefulWidget {
     this.editorBackgroundColor,
     this.galleryThumbnailQuality,
     this.initialImagePath,
+    this.isInitialImageLocked,
     this.onDoneButtonTitle,
     required this.showAddImageButtonTitle,
+    this.colorDefaultOffsetIndex,
+    this.placeholderColor,
   }) : super(key: key);
 
   @override
@@ -125,11 +134,15 @@ class _MainViewState extends State<MainView> {
       }
       if (widget.initialImagePath != null) {
         _control.mediaPath = widget.initialImagePath!;
+        var editItem = EditableItem()
+          ..type = ItemType.image
+          ..position = const Offset(0.0, 0);
+        if (widget.isInitialImageLocked == true) {
+          editItem = editItem..isLock = true;
+        }
         _draggableWidgetProvider.draggableWidget.insert(
           0,
-          EditableItem()
-            ..type = ItemType.image
-            ..position = const Offset(0.0, 0),
+          editItem,
         );
       }
     });
@@ -294,27 +307,33 @@ class _MainViewState extends State<MainView> {
                         ),
 
                         /// middle text
-                        if (itemProvider.draggableWidget.isEmpty &&
+                        if (itemProvider.draggableWidget
+                                .where((e) => !e.isLock)
+                                .isEmpty &&
                             !controlNotifier.isTextEditing &&
                             paintingProvider.lines.isEmpty)
                           IgnorePointer(
                             ignoring: true,
                             child: Align(
                               alignment: const Alignment(0, -0.1),
-                              child: Text('タップしてにゅうりょく',
-                                  style: TextStyle(
-                                      fontFamily: 'Alegreya',
-                                      package: 'stories_editor',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 30,
-                                      color: Colors.white.withOpacity(0.5),
-                                      shadows: <Shadow>[
-                                        Shadow(
-                                            offset: const Offset(1.0, 1.0),
-                                            blurRadius: 3.0,
-                                            color:
-                                                Colors.black45.withOpacity(0.3))
-                                      ])),
+                              child: Text(
+                                'タップしてにゅうりょく',
+                                style: TextStyle(
+                                  fontFamily: 'Alegreya',
+                                  package: 'stories_editor',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 30,
+                                  color: widget.placeholderColor ??
+                                      Colors.white.withOpacity(0.5),
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: const Offset(1.0, 1.0),
+                                      blurRadius: 3.0,
+                                      color: Colors.black45.withOpacity(0.3),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
 
@@ -342,6 +361,8 @@ class _MainViewState extends State<MainView> {
                           visible: controlNotifier.isTextEditing,
                           child: TextEditor(
                             context: context,
+                            colorDefaultOffsetIndex:
+                                widget.colorDefaultOffsetIndex,
                           ),
                         ),
 
@@ -407,6 +428,9 @@ class _MainViewState extends State<MainView> {
     if (_activeItem == null) {
       return;
     }
+    if (_activeItem?.isLock == true) {
+      return;
+    }
     _initPos = details.focalPoint;
     _currentPos = _activeItem!.position;
     _currentScale = _activeItem!.scale;
@@ -417,6 +441,9 @@ class _MainViewState extends State<MainView> {
   void _onScaleUpdate(ScaleUpdateDetails details) {
     final ScreenUtil screenUtil = ScreenUtil();
     if (_activeItem == null) {
+      return;
+    }
+    if (_activeItem?.isLock == true) {
       return;
     }
     final delta = details.focalPoint - _initPos;
