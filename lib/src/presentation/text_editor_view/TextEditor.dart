@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +43,7 @@ class _TextEditorState extends State<TextEditor> {
         ..textController.text = _editorNotifier.text
         ..fontFamilyController = PageController(viewportFraction: .125);
       final colorOffsetIndex = widget.colorDefaultOffsetIndex;
-      if (colorOffsetIndex != null) {
+      if (colorOffsetIndex != null && _editorNotifier.text.isEmpty) {
         _editorNotifier.textColor =
             AppColors.defaultColors.length <= colorOffsetIndex
                 ? 0
@@ -59,6 +61,8 @@ class _TextEditorState extends State<TextEditor> {
         child: Consumer3<ControlNotifier, TextEditingNotifier,
             KeyboardHeightNotifier>(
           builder: (_, controlNotifier, editorNotifier, keyboardNotifier, __) {
+            final bottomMenuPosition =
+                max(keyboardNotifier.keyboardHeight - 80, 0.0);
             return Scaffold(
               backgroundColor: Colors.transparent,
               body: GestureDetector(
@@ -110,7 +114,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font family selector (bottom)
                         Positioned(
                           left: 40,
-                          bottom: keyboardNotifier.keyboardHeight - 80,
+                          bottom: bottomMenuPosition,
                           child: Visibility(
                             visible: editorNotifier.isFontFamily &&
                                 !editorNotifier.isTextAnimation,
@@ -127,7 +131,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font color selector (bottom)
                         Positioned(
                           left: 40,
-                          bottom: keyboardNotifier.keyboardHeight - 80,
+                          bottom: bottomMenuPosition,
                           child: Visibility(
                               visible: !editorNotifier.isFontFamily &&
                                   !editorNotifier.isTextAnimation,
@@ -143,7 +147,7 @@ class _TextEditorState extends State<TextEditor> {
                         /// font animation selector (bottom
                         Positioned(
                           left: 40,
-                          bottom: keyboardNotifier.keyboardHeight - 80,
+                          bottom: bottomMenuPosition,
                           child: Visibility(
                               visible: editorNotifier.isTextAnimation,
                               child: const Align(

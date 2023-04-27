@@ -178,7 +178,7 @@ class TextEditingNotifier extends ChangeNotifier {
     _text = '';
     _textController.text = '';
     _textColor = 0;
-    _textSize = 20.0;
+    _textSize = 25.0;
     _fontFamilyIndex = 0;
     _fontAnimationIndex = 0;
     _textAlign = TextAlign.center;
