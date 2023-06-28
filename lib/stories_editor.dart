@@ -64,7 +64,7 @@ class StoriesEditor extends StatefulWidget {
 
   final Color? placeholderColor;
 
-  final String languageCode;
+  final String? languageCode;
 
   const StoriesEditor({
     Key? key,
@@ -85,7 +85,7 @@ class StoriesEditor extends StatefulWidget {
     this.showAddImageButtonTitle,
     this.colorDefaultOffsetIndex,
     this.placeholderColor,
-    required this.languageCode,
+    this.languageCode,
   }) : super(key: key);
 
   @override
@@ -156,7 +156,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
               showAddImageButtonTitle: widget.showAddImageButtonTitle,
               colorDefaultOffsetIndex: widget.colorDefaultOffsetIndex,
               placeholderColor: widget.placeholderColor,
-              languageCode: widget.languageCode,
+              languageCode: widget.languageCode ?? 'en',
             );
           }),
         ),
