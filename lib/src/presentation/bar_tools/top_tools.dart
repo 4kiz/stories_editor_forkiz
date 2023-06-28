@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/language_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
 import 'package:stories_editor/src/presentation/utils/modal_sheets.dart';
@@ -23,9 +24,10 @@ class TopTools extends StatefulWidget {
 class _TopToolsState extends State<TopTools> {
   @override
   Widget build(BuildContext context) {
-    return Consumer3<ControlNotifier, PaintingNotifier,
-        DraggableWidgetNotifier>(
-      builder: (_, controlNotifier, paintingNotifier, itemNotifier, __) {
+    return Consumer4<ControlNotifier, PaintingNotifier, DraggableWidgetNotifier,
+        LanguageProvider>(
+      builder:
+          (_, controlNotifier, paintingNotifier, itemNotifier, language, __) {
         return SafeArea(
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 20.w),
@@ -44,8 +46,10 @@ class _TopToolsState extends State<TopTools> {
                     onTap: () async {
                       // TODO(nakamura): 必要かどうか、文言検討
                       var res = await exitDialog(
-                          context: widget.context,
-                          contentKey: widget.contentKey);
+                        context: widget.context,
+                        contentKey: widget.contentKey,
+                        languageProvider: language,
+                      );
                       if (res) {
                         Navigator.pop(context, true);
                       }

@@ -54,6 +54,7 @@ class _ExampleState extends State<Example> {
                           debugPrint(nextEdit.toString());
                           Share.shareFiles([uri]);
                         },
+                        languageCode: 'ja',
                       ),
                     ),
                   );
@@ -84,6 +85,7 @@ class _ExampleState extends State<Example> {
                           isInitialImageLocked: true,
                           colorDefaultOffsetIndex: 7,
                           placeholderColor: Colors.amber,
+                          languageCode: 'ja',
                         ),
                       ),
                     );
