@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:stories_editor/src/domain/models/editable_items.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/language_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/sevices/save_as_image.dart';
 import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
@@ -168,12 +169,16 @@ class _BottomToolsState extends State<BottomTools> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(
-                                        widget.onDoneButtonTitle ?? 'とうこうする',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w400,
-                                        ),
+                                      Consumer<LanguageProvider>(
+                                        builder: (context, provider, _) {
+                                          return Text(
+                                            widget.onDoneButtonTitle ?? provider.strings.post(),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          );
+                                        }
                                       ),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 5),

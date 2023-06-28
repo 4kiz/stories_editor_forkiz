@@ -9,6 +9,7 @@ import 'package:stories_editor/src/domain/providers/notifiers/control_provider.d
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/gradient_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/keyboard_height_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/language_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
@@ -63,6 +64,8 @@ class StoriesEditor extends StatefulWidget {
 
   final Color? placeholderColor;
 
+  final String languageCode;
+
   const StoriesEditor({
     Key? key,
     required this.giphyKey,
@@ -82,6 +85,7 @@ class StoriesEditor extends StatefulWidget {
     this.showAddImageButtonTitle,
     this.colorDefaultOffsetIndex,
     this.placeholderColor,
+    required this.languageCode,
   }) : super(key: key);
 
   @override
@@ -127,6 +131,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
             ChangeNotifierProvider(create: (_) => PaintingNotifier()),
             ChangeNotifierProvider(create: (_) => TextEditingNotifier()),
             ChangeNotifierProvider(create: (_) => KeyboardHeightNotifier()),
+            ChangeNotifierProvider(create: (_) => LanguageProvider()),
           ],
           child: Consumer<KeyboardHeightNotifier>(
               builder: (context, keyboard, __) {
@@ -151,6 +156,7 @@ class _StoriesEditorState extends State<StoriesEditor> {
               showAddImageButtonTitle: widget.showAddImageButtonTitle,
               colorDefaultOffsetIndex: widget.colorDefaultOffsetIndex,
               placeholderColor: widget.placeholderColor,
+              languageCode: widget.languageCode,
             );
           }),
         ),

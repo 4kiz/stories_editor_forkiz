@@ -11,9 +11,11 @@ import 'package:stories_editor/src/domain/models/painting_model.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/control_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/draggable_widget_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/gradient_notifier.dart';
+import 'package:stories_editor/src/domain/providers/notifiers/language_provider.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/painting_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/scroll_notifier.dart';
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
+import 'package:stories_editor/src/l18n/strings.dart';
 import 'package:stories_editor/src/presentation/bar_tools/bottom_tools.dart';
 import 'package:stories_editor/src/presentation/bar_tools/top_tools.dart';
 import 'package:stories_editor/src/presentation/draggable_items/delete_item.dart';
@@ -70,6 +72,8 @@ class MainView extends StatefulWidget {
 
   final Color? placeholderColor;
 
+  final String languageCode;
+
   MainView({
     Key? key,
     required this.giphyKey,
@@ -89,6 +93,7 @@ class MainView extends StatefulWidget {
     required this.showAddImageButtonTitle,
     this.colorDefaultOffsetIndex,
     this.placeholderColor,
+    required this.languageCode,
   }) : super(key: key);
 
   @override
@@ -118,6 +123,7 @@ class _MainViewState extends State<MainView> {
       var _control = Provider.of<ControlNotifier>(context, listen: false);
       var _draggableWidgetProvider =
           Provider.of<DraggableWidgetNotifier>(context, listen: false);
+      var _language = Provider.of<LanguageProvider>(context, listen: false);
 
       /// initialize control variable provider
       _control.giphyKey = widget.giphyKey;
@@ -145,6 +151,7 @@ class _MainViewState extends State<MainView> {
           editItem,
         );
       }
+      _language.strings = from(widget.languageCode);
     });
     super.initState();
   }
@@ -316,24 +323,27 @@ class _MainViewState extends State<MainView> {
                             ignoring: true,
                             child: Align(
                               alignment: const Alignment(0, -0.1),
-                              child: Text(
-                                'タップしてにゅうりょく',
-                                style: TextStyle(
-                                  fontFamily: 'Alegreya',
-                                  package: 'stories_editor',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 30,
-                                  color: widget.placeholderColor ??
-                                      Colors.white.withOpacity(0.5),
-                                  shadows: <Shadow>[
-                                    Shadow(
-                                      offset: const Offset(1.0, 1.0),
-                                      blurRadius: 3.0,
-                                      color: Colors.black45.withOpacity(0.3),
-                                    )
-                                  ],
-                                ),
-                              ),
+                              child: Consumer<LanguageProvider>(
+                                  builder: (context, provider, _) {
+                                return Text(
+                                  provider.strings.tapAndInput(),
+                                  style: TextStyle(
+                                    fontFamily: 'Alegreya',
+                                    package: 'stories_editor',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 30,
+                                    color: widget.placeholderColor ??
+                                        Colors.white.withOpacity(0.5),
+                                    shadows: <Shadow>[
+                                      Shadow(
+                                        offset: const Offset(1.0, 1.0),
+                                        blurRadius: 3.0,
+                                        color: Colors.black45.withOpacity(0.3),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
                             ),
                           ),
 
@@ -402,6 +412,8 @@ class _MainViewState extends State<MainView> {
   Future<bool> _popScope() async {
     final controlNotifier =
         Provider.of<ControlNotifier>(context, listen: false);
+    final languageProvider =
+        Provider.of<LanguageProvider>(context, listen: false);
 
     /// change to false text editing
     if (controlNotifier.isTextEditing) {
@@ -418,7 +430,11 @@ class _MainViewState extends State<MainView> {
     /// show close dialog
     else if (!controlNotifier.isTextEditing && !controlNotifier.isPainting) {
       return widget.onBackPress ??
-          exitDialog(context: context, contentKey: contentKey);
+          exitDialog(
+            context: context,
+            contentKey: contentKey,
+            languageProvider: languageProvider,
+          );
     }
     return false;
   }
