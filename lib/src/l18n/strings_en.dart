@@ -14,13 +14,13 @@ class StringsEn implements Strings {
   String cancel() => 'Cancel';
 
   @override
-  String editingErased() => 'All editing content will be erased.';
+  String editingErased() => 'Your edits will be permanently lost.';
 
   @override
-  String save() => 'Save to Photo';
+  String save() => 'Save photo';
 
   @override
-  String stopEditing() => 'Do you want to stop editing?';
+  String stopEditing() => 'Do you want to quit editing?';
 
   @override
   String yes() => 'Yes';
