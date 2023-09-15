@@ -1,8 +1,7 @@
 name: example
 description: A new Flutter project.
 
-
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -13,11 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
-  share_plus: ^4.0.10+1
+  share_plus: ^7.1.0
   permission_handler: ^10.0.0
-  image_picker: ^0.8.6
+  image_picker: ^1.0.4
 
   stories_editor:
     path: ../
@@ -26,16 +24,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
-
+  flutter_lints: ^2.0.3
 
 flutter:
-
-
   uses-material-design: true
 
   fonts:
-    - family:  Shizuru
+    - family: Shizuru
       fonts:
         - asset: assets/fonts/Shizuru-Regular.ttf
 

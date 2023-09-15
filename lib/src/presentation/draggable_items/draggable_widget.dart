@@ -226,25 +226,10 @@ class DraggableWidget extends StatelessWidget {
       fontFamily: controlNotifier.fontList![draggableWidget.fontFamily],
       package: controlNotifier.isCustomFontList ? null : 'stories_editor',
       fontWeight: FontWeight.w500,
-      // shadows: <Shadow>[
-      //   Shadow(
-      //       offset: const Offset(0, 0),
-      //       //blurRadius: 3.0,
-      //       color: draggableWidget.textColor == Colors.black
-      //           ? Colors.white54
-      //           : Colors.black)
-      // ]
     ).copyWith(
-        color: background ? Colors.black : draggableWidget.textColor,
-        fontSize: draggableWidget.deletePosition ? 8 : draggableWidget.fontSize,
-        background: Paint()
-          ..strokeWidth = 20.0
-          ..color = draggableWidget.backGroundColor
-          ..style = paintingStyle
-          ..strokeJoin = StrokeJoin.round
-          ..filterQuality = FilterQuality.high
-          ..strokeCap = StrokeCap.round
-          ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 1));
+      color: background ? Colors.black : draggableWidget.textColor,
+      fontSize: draggableWidget.deletePosition ? 8 : draggableWidget.fontSize,
+    );
   }
 
   _deleteTopOffset() {

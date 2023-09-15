@@ -32,8 +32,14 @@ class ColorDetection {
     double px = localPosition.dx;
     double py = localPosition.dy;
 
-    int pixel32 = photo!.getPixelSafe(px.toInt(), py.toInt());
-    int hex = abgrToArgb(pixel32);
+    final pixel32 = photo!.getPixelSafe(px.toInt(), py.toInt());
+    final color = Color.fromARGB(
+      pixel32.a.toInt(),
+      pixel32.r.toInt(),
+      pixel32.g.toInt(),
+      pixel32.b.toInt(),
+    );
+    int hex = abgrToArgb(color.value);
 
     stateController!.add(Color(hex));
     return Color(hex);
@@ -50,7 +56,7 @@ class ColorDetection {
   }
 
   void setImageBytes(ByteData imageBytes) {
-    List<int> values = imageBytes.buffer.asUint8List();
+    final values = imageBytes.buffer.asUint8List();
     photo = null;
     photo = img.decodeImage(values);
   }
