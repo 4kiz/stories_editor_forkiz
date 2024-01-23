@@ -44,11 +44,13 @@ class _PaintingState extends State<Painting> {
     PaintingModel? line;
 
     /// screen size
-    var screenSize = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    var screenSize = MediaQueryData.fromView(
+      WidgetsBinding.instance.platformDispatcher.views.single,
+    );
 
     /// on gestures start
-    void _onPanStart(DragStartDetails details,
-        PaintingNotifier paintingNotifier, ControlNotifier controlProvider) {
+    void onPanStart(DragStartDetails details, PaintingNotifier paintingNotifier,
+        ControlNotifier controlProvider) {
       final box = context.findRenderObject() as RenderBox;
       final offset = box.globalToLocal(details.globalPosition);
       final point = Point(offset.dx, offset.dy);
@@ -74,7 +76,7 @@ class _PaintingState extends State<Painting> {
     }
 
     /// on gestures update
-    void _onPanUpdate(DragUpdateDetails details,
+    void onPanUpdate(DragUpdateDetails details,
         PaintingNotifier paintingNotifier, ControlNotifier controlNotifier) {
       final box = context.findRenderObject() as RenderBox;
       final offset = box.globalToLocal(details.globalPosition);
@@ -102,24 +104,24 @@ class _PaintingState extends State<Painting> {
     }
 
     /// on gestures end
-    void _onPanEnd(DragEndDetails details, PaintingNotifier paintingNotifier) {
+    void onPanEnd(DragEndDetails details, PaintingNotifier paintingNotifier) {
       paintingNotifier.lines = List.from(paintingNotifier.lines)..add(line!);
       line = null;
       paintingNotifier.linesStreamController.add(paintingNotifier.lines);
     }
 
     /// paint current line
-    Widget _renderCurrentLine(BuildContext context,
+    Widget renderCurrentLine(BuildContext context,
         PaintingNotifier paintingNotifier, ControlNotifier controlNotifier) {
       return GestureDetector(
         onPanStart: (details) {
-          _onPanStart(details, paintingNotifier, controlNotifier);
+          onPanStart(details, paintingNotifier, controlNotifier);
         },
         onPanUpdate: (details) {
-          _onPanUpdate(details, paintingNotifier, controlNotifier);
+          onPanUpdate(details, paintingNotifier, controlNotifier);
         },
         onPanEnd: (details) {
-          _onPanEnd(details, paintingNotifier);
+          onPanEnd(details, paintingNotifier);
         },
         child: RepaintBoundary(
           child: SafeArea(
@@ -166,7 +168,7 @@ class _PaintingState extends State<Painting> {
             body: Stack(
               children: [
                 /// render current line
-                _renderCurrentLine(context, paintingNotifier, controlNotifier),
+                renderCurrentLine(context, paintingNotifier, controlNotifier),
 
                 /// select line width
                 const Padding(

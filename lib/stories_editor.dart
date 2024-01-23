@@ -89,10 +89,10 @@ class StoriesEditor extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _StoriesEditorState createState() => _StoriesEditorState();
+  StoriesEditorState createState() => StoriesEditorState();
 }
 
-class _StoriesEditorState extends State<StoriesEditor> {
+class StoriesEditorState extends State<StoriesEditor> {
   @override
   void initState() {
     Paint.enableDithering = true;

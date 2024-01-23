@@ -12,12 +12,12 @@ class AnimationSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     return Consumer2<TextEditingNotifier, ControlNotifier>(
       builder: (context, editorNotifier, controlNotifier, child) {
         return Container(
-          height: _size.width * 0.1,
-          width: _size.width,
+          height: size.width * 0.1,
+          width: size.width,
           alignment: Alignment.center,
           child: PageView.builder(
             controller: editorNotifier.textAnimationController,
@@ -36,8 +36,8 @@ class AnimationSelector extends StatelessWidget {
                   editorNotifier.textAnimationController.jumpToPage(index);
                 },
                 child: Container(
-                  height: _size.width * 0.25,
-                  width: _size.width * 0.25,
+                  height: size.width * 0.25,
+                  width: size.width * 0.25,
                   alignment: Alignment.center,
                   margin: const EdgeInsets.all(2),
                   decoration: BoxDecoration(

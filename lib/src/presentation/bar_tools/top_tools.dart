@@ -18,10 +18,10 @@ class TopTools extends StatefulWidget {
       : super(key: key);
 
   @override
-  _TopToolsState createState() => _TopToolsState();
+  TopToolsState createState() => TopToolsState();
 }
 
-class _TopToolsState extends State<TopTools> {
+class TopToolsState extends State<TopTools> {
   @override
   Widget build(BuildContext context) {
     return Consumer4<ControlNotifier, PaintingNotifier, DraggableWidgetNotifier,
@@ -38,22 +38,23 @@ class _TopToolsState extends State<TopTools> {
               children: [
                 /// close button
                 ToolButton(
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () async {
-                      // TODO(nakamura): 必要かどうか、文言検討
-                      var res = await exitDialog(
-                        context: widget.context,
-                        contentKey: widget.contentKey,
-                        languageProvider: language,
-                      );
-                      if (res) {
-                        Navigator.pop(context, true);
-                      }
-                    }),
+                  backGroundColor: Colors.black12,
+                  onTap: () async {
+                    // TODO(nakamura): 必要かどうか、文言検討
+                    var res = await exitDialog(
+                      context: widget.context,
+                      contentKey: widget.contentKey,
+                      languageProvider: language,
+                    );
+                    if (mounted && res) {
+                      Navigator.pop(context, true);
+                    }
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                ),
                 if (controlNotifier.mediaPath.isEmpty)
                   _selectColor(
                       controlProvider: controlNotifier,
@@ -70,27 +71,28 @@ class _TopToolsState extends State<TopTools> {
                         }
                       }),
                 ToolButton(
-                    child: const ImageIcon(
-                      AssetImage('assets/icons/download.png',
-                          package: 'stories_editor'),
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () async {
-                      if (paintingNotifier.lines.isNotEmpty ||
-                          itemNotifier.draggableWidget.isNotEmpty) {
-                        var response = await takePicture(
-                            contentKey: widget.contentKey,
-                            context: context,
-                            saveToGallery: true);
-                        if (response) {
-                          Fluttertoast.showToast(msg: 'Successfully saved');
-                        } else {
-                          Fluttertoast.showToast(msg: 'Error');
-                        }
+                  backGroundColor: Colors.black12,
+                  onTap: () async {
+                    if (paintingNotifier.lines.isNotEmpty ||
+                        itemNotifier.draggableWidget.isNotEmpty) {
+                      var response = await takePicture(
+                          contentKey: widget.contentKey,
+                          context: context,
+                          saveToGallery: true);
+                      if (response) {
+                        Fluttertoast.showToast(msg: 'Successfully saved');
+                      } else {
+                        Fluttertoast.showToast(msg: 'Error');
                       }
-                    }),
+                    }
+                  },
+                  child: const ImageIcon(
+                    AssetImage('assets/icons/download.png',
+                        package: 'stories_editor'),
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
                 // ToolButton(
                 //   child: const ImageIcon(
                 //     AssetImage('assets/icons/stickers.png',
@@ -103,17 +105,18 @@ class _TopToolsState extends State<TopTools> {
                 //       context: context, giphyKey: controlNotifier.giphyKey),
                 // ),
                 ToolButton(
-                    child: const ImageIcon(
-                      AssetImage('assets/icons/draw.png',
-                          package: 'stories_editor'),
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                    backGroundColor: Colors.black12,
-                    onTap: () {
-                      controlNotifier.isPainting = true;
-                      //createLinePainting(context: context);
-                    }),
+                  backGroundColor: Colors.black12,
+                  onTap: () {
+                    controlNotifier.isPainting = true;
+                    //createLinePainting(context: context);
+                  },
+                  child: const ImageIcon(
+                    AssetImage('assets/icons/draw.png',
+                        package: 'stories_editor'),
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                ),
                 // ToolButton(
                 //   child: ImageIcon(
                 //     const AssetImage('assets/icons/photo_filter.png',
@@ -126,15 +129,15 @@ class _TopToolsState extends State<TopTools> {
                 //   !controlNotifier.isPhotoFilter,
                 // ),
                 ToolButton(
+                  backGroundColor: Colors.black12,
+                  onTap: () => controlNotifier.isTextEditing =
+                      !controlNotifier.isTextEditing,
                   child: const ImageIcon(
                     AssetImage('assets/icons/text.png',
                         package: 'stories_editor'),
                     color: Colors.white,
                     size: 20,
                   ),
-                  backGroundColor: Colors.black12,
-                  onTap: () => controlNotifier.isTextEditing =
-                      !controlNotifier.isTextEditing,
                 ),
               ],
             ),

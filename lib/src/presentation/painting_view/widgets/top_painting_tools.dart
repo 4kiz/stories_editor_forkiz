@@ -10,10 +10,10 @@ class TopPaintingTools extends StatefulWidget {
   const TopPaintingTools({Key? key}) : super(key: key);
 
   @override
-  _TopPaintingToolsState createState() => _TopPaintingToolsState();
+  TopPaintingToolsState createState() => TopPaintingToolsState();
 }
 
-class _TopPaintingToolsState extends State<TopPaintingTools> {
+class TopPaintingToolsState extends State<TopPaintingTools> {
   @override
   Widget build(BuildContext context) {
     return Consumer2<ControlNotifier, PaintingNotifier>(

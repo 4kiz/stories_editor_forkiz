@@ -12,10 +12,10 @@ class FileImageBG extends StatefulWidget {
       {Key? key, required this.filePath, required this.generatedGradient})
       : super(key: key);
   @override
-  _FileImageBGState createState() => _FileImageBGState();
+  FileImageBGState createState() => FileImageBGState();
 }
 
-class _FileImageBGState extends State<FileImageBG> {
+class FileImageBGState extends State<FileImageBG> {
   GlobalKey imageKey = GlobalKey();
   GlobalKey paintKey = GlobalKey();
 
