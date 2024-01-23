@@ -12,7 +12,7 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScreenUtil screenUtil = ScreenUtil();
-    FocusNode _textNode = FocusNode();
+    FocusNode textNode = FocusNode();
     return Consumer2<TextEditingNotifier, ControlNotifier>(
       builder: (context, editorNotifier, controlNotifier, child) {
         return Center(
@@ -28,7 +28,7 @@ class TextFieldWidget extends StatelessWidget {
               children: [
                 _textField(
                   editorNotifier: editorNotifier,
-                  textNode: _textNode,
+                  textNode: textNode,
                   controlNotifier: controlNotifier,
                   paintingStyle: PaintingStyle.stroke,
                 )

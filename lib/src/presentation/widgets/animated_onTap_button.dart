@@ -15,10 +15,10 @@ class AnimatedOnTapButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AnimatedOnTapButtonState createState() => _AnimatedOnTapButtonState();
+  AnimatedOnTapButtonState createState() => AnimatedOnTapButtonState();
 }
 
-class _AnimatedOnTapButtonState extends State<AnimatedOnTapButton>
+class AnimatedOnTapButtonState extends State<AnimatedOnTapButton>
     with TickerProviderStateMixin {
   double squareScaleA = 1;
   AnimationController? _controllerA;

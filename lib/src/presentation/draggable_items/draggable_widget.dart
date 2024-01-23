@@ -33,9 +33,9 @@ class DraggableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ScreenUtil screenUtil = ScreenUtil();
-    var _colorProvider =
+    var colorProvider =
         Provider.of<GradientNotifier>(this.context, listen: false);
-    var _controlProvider =
+    var controlProvider =
         Provider.of<ControlNotifier>(this.context, listen: false);
     Widget? overlayWidget;
 
@@ -52,7 +52,7 @@ class DraggableWidget extends StatelessWidget {
               width: draggableWidget.deletePosition ? 100 : null,
               height: draggableWidget.deletePosition ? 100 : null,
               child: AnimatedOnTapButton(
-                onTap: () => _onTap(context, draggableWidget, _controlProvider),
+                onTap: () => _onTap(context, draggableWidget, controlProvider),
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
@@ -60,7 +60,7 @@ class DraggableWidget extends StatelessWidget {
                       child: _text(
                           background: true,
                           paintingStyle: PaintingStyle.fill,
-                          controlNotifier: _controlProvider),
+                          controlNotifier: controlProvider),
                     ),
                     IgnorePointer(
                       ignoring: true,
@@ -68,7 +68,7 @@ class DraggableWidget extends StatelessWidget {
                         child: _text(
                             background: true,
                             paintingStyle: PaintingStyle.stroke,
-                            controlNotifier: _controlProvider),
+                            controlNotifier: controlProvider),
                       ),
                     ),
                     Padding(
@@ -78,7 +78,7 @@ class DraggableWidget extends StatelessWidget {
                           Center(
                             child: _text(
                                 paintingStyle: PaintingStyle.fill,
-                                controlNotifier: _controlProvider),
+                                controlNotifier: controlProvider),
                           ),
                         ],
                       ),
@@ -93,14 +93,14 @@ class DraggableWidget extends StatelessWidget {
 
       /// image [file_image_gb.dart]
       case ItemType.image:
-        if (_controlProvider.mediaPath.isNotEmpty) {
+        if (controlProvider.mediaPath.isNotEmpty) {
           overlayWidget = SizedBox(
             width: screenUtil.screenWidth,
             child: FileImageBG(
-              filePath: File(_controlProvider.mediaPath),
+              filePath: File(controlProvider.mediaPath),
               generatedGradient: (color1, color2) {
-                _colorProvider.color1 = color1;
-                _colorProvider.color2 = color2;
+                colorProvider.color1 = color1;
+                colorProvider.color2 = color2;
               },
             ),
           );
@@ -258,26 +258,26 @@ class DraggableWidget extends StatelessWidget {
   /// onTap text
   void _onTap(BuildContext context, EditableItem item,
       ControlNotifier controlNotifier) {
-    var _editorProvider =
+    var editorProvider =
         Provider.of<TextEditingNotifier>(this.context, listen: false);
-    var _itemProvider =
+    var itemProvider =
         Provider.of<DraggableWidgetNotifier>(this.context, listen: false);
 
     /// load text attributes
-    _editorProvider.textController.text = item.text.trim();
-    _editorProvider.text = item.text.trim();
-    _editorProvider.fontFamilyIndex = item.fontFamily;
-    _editorProvider.textSize = item.fontSize;
-    _editorProvider.backGroundColor = item.backGroundColor;
-    _editorProvider.textAlign = item.textAlign;
-    _editorProvider.textColor =
+    editorProvider.textController.text = item.text.trim();
+    editorProvider.text = item.text.trim();
+    editorProvider.fontFamilyIndex = item.fontFamily;
+    editorProvider.textSize = item.fontSize;
+    editorProvider.backGroundColor = item.backGroundColor;
+    editorProvider.textAlign = item.textAlign;
+    editorProvider.textColor =
         controlNotifier.colorList!.indexOf(item.textColor);
-    _editorProvider.animationType = item.animationType;
-    _editorProvider.textList = item.textList;
-    _editorProvider.fontAnimationIndex = item.fontAnimationIndex;
-    _itemProvider.draggableWidget
-        .removeAt(_itemProvider.draggableWidget.indexOf(item));
-    _editorProvider.fontFamilyController = PageController(
+    editorProvider.animationType = item.animationType;
+    editorProvider.textList = item.textList;
+    editorProvider.fontAnimationIndex = item.fontAnimationIndex;
+    itemProvider.draggableWidget
+        .removeAt(itemProvider.draggableWidget.indexOf(item));
+    editorProvider.fontFamilyController = PageController(
       initialPage: item.fontFamily,
       viewportFraction: .1,
     );

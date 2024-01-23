@@ -52,7 +52,7 @@ class _ExampleState extends State<Example> {
                         onDone: (uri, nextEdit) {
                           debugPrint(uri);
                           debugPrint(nextEdit.toString());
-                          Share.shareFiles([uri]);
+                          Share.shareXFiles([XFile(uri)]);
                         },
                         languageCode: 'ja',
                       ),
@@ -67,7 +67,7 @@ class _ExampleState extends State<Example> {
                   final picker = ImagePicker();
                   final image =
                       await picker.pickImage(source: ImageSource.gallery);
-                  if (image != null) {
+                  if (mounted && image != null) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -79,7 +79,7 @@ class _ExampleState extends State<Example> {
                           onDone: (uri, nextEdit) {
                             debugPrint(uri);
                             debugPrint(nextEdit.toString());
-                            Share.shareFiles([uri]);
+                            Share.shareXFiles([XFile(uri)]);
                           },
                           initialImagePath: image.path,
                           isInitialImageLocked: true,

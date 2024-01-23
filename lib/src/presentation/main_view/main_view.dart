@@ -97,10 +97,10 @@ class MainView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MainViewState createState() => _MainViewState();
+  MainViewState createState() => MainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class MainViewState extends State<MainView> {
   /// content container key
   final GlobalKey contentKey = GlobalKey();
 
@@ -120,38 +120,38 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      var _control = Provider.of<ControlNotifier>(context, listen: false);
-      var _draggableWidgetProvider =
+      var control = Provider.of<ControlNotifier>(context, listen: false);
+      var draggableWidgetProvider =
           Provider.of<DraggableWidgetNotifier>(context, listen: false);
-      var _language = Provider.of<LanguageProvider>(context, listen: false);
+      var language = Provider.of<LanguageProvider>(context, listen: false);
 
       /// initialize control variable provider
-      _control.giphyKey = widget.giphyKey;
-      _control.middleBottomWidget = widget.middleBottomWidget;
-      _control.isCustomFontList = widget.isCustomFontList ?? false;
+      control.giphyKey = widget.giphyKey;
+      control.middleBottomWidget = widget.middleBottomWidget;
+      control.isCustomFontList = widget.isCustomFontList ?? false;
       if (widget.gradientColors != null) {
-        _control.gradientColors = widget.gradientColors;
+        control.gradientColors = widget.gradientColors;
       }
       if (widget.fontFamilyList != null) {
-        _control.fontList = widget.fontFamilyList;
+        control.fontList = widget.fontFamilyList;
       }
       if (widget.colorList != null) {
-        _control.colorList = widget.colorList;
+        control.colorList = widget.colorList;
       }
       if (widget.initialImagePath != null) {
-        _control.mediaPath = widget.initialImagePath!;
+        control.mediaPath = widget.initialImagePath!;
         var editItem = EditableItem()
           ..type = ItemType.image
           ..position = const Offset(0.0, 0);
         if (widget.isInitialImageLocked == true) {
           editItem = editItem..isLock = true;
         }
-        _draggableWidgetProvider.draggableWidget.insert(
+        draggableWidgetProvider.draggableWidget.insert(
           0,
           editItem,
         );
       }
-      _language.strings = from(widget.languageCode);
+      language.strings = from(widget.languageCode);
     });
     super.initState();
   }
@@ -235,10 +235,10 @@ class _MainViewState extends State<MainView> {
                                           /// in this case photo view works as a main background container to manage
                                           /// the gestures of all movable items.
                                           PhotoView.customChild(
-                                            child: Container(),
                                             backgroundDecoration:
                                                 const BoxDecoration(
                                                     color: Colors.transparent),
+                                            child: Container(),
                                           ),
 
                                           ///list items
@@ -502,7 +502,7 @@ class _MainViewState extends State<MainView> {
 
   /// delete item widget with offset position
   void _deleteItemOnCoordinates(EditableItem item, PointerUpEvent details) {
-    var _itemProvider =
+    var itemProvider =
         Provider.of<DraggableWidgetNotifier>(context, listen: false)
             .draggableWidget;
     _inAction = false;
@@ -516,7 +516,7 @@ class _MainViewState extends State<MainView> {
             item.position.dx >= -0.35.w &&
             item.position.dx <= 0.15) {
       setState(() {
-        _itemProvider.removeAt(_itemProvider.indexOf(item));
+        itemProvider.removeAt(itemProvider.indexOf(item));
         HapticFeedback.heavyImpact();
       });
     } else {
