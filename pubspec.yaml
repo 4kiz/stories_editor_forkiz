@@ -25,7 +25,7 @@ dependencies:
   #own packages
   gallery_media_picker: ^0.1.0
 
-  modal_gif_picker: ^0.0.2
+  # modal_gif_picker: ^0.0.2
   # painting
   perfect_freehand: ^1.0.4
   # positioning
