@@ -5,13 +5,12 @@ import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 
 class DeleteItem extends StatelessWidget {
   const DeleteItem(
-      {Key? key,
+      {super.key,
       required EditableItem? activeItem,
       required this.isDeletePosition,
       required this.animationsDuration,
       this.deletedItem})
-      : _activeItem = activeItem,
-        super(key: key);
+      : _activeItem = activeItem;
 
   final EditableItem? _activeItem;
   final bool isDeletePosition;

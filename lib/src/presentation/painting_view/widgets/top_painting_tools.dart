@@ -7,7 +7,7 @@ import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/tool_button.dart';
 
 class TopPaintingTools extends StatefulWidget {
-  const TopPaintingTools({Key? key}) : super(key: key);
+  const TopPaintingTools({super.key});
 
   @override
   TopPaintingToolsState createState() => TopPaintingToolsState();

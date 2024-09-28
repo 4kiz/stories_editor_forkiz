@@ -14,8 +14,7 @@ import 'package:stories_editor/src/presentation/widgets/tool_button.dart';
 class TopTools extends StatefulWidget {
   final GlobalKey contentKey;
   final BuildContext context;
-  const TopTools({Key? key, required this.contentKey, required this.context})
-      : super(key: key);
+  const TopTools({super.key, required this.contentKey, required this.context});
 
   @override
   TopToolsState createState() => TopToolsState();
@@ -40,13 +39,12 @@ class TopToolsState extends State<TopTools> {
                 ToolButton(
                   backGroundColor: Colors.black12,
                   onTap: () async {
-                    // TODO(nakamura): 必要かどうか、文言検討
                     var res = await exitDialog(
                       context: widget.context,
                       contentKey: widget.contentKey,
                       languageProvider: language,
                     );
-                    if (mounted && res) {
+                    if (context.mounted && res) {
                       Navigator.pop(context, true);
                     }
                   },

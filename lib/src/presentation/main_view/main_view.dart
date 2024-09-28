@@ -75,7 +75,7 @@ class MainView extends StatefulWidget {
   final String languageCode;
 
   MainView({
-    Key? key,
+    super.key,
     required this.giphyKey,
     required this.onDone,
     this.middleBottomWidget,
@@ -94,7 +94,7 @@ class MainView extends StatefulWidget {
     this.colorDefaultOffsetIndex,
     this.placeholderColor,
     required this.languageCode,
-  }) : super(key: key);
+  });
 
   @override
   MainViewState createState() => MainViewState();
@@ -164,8 +164,10 @@ class MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     final ScreenUtil screenUtil = ScreenUtil();
-    return WillPopScope(
-      onWillPop: _popScope,
+    return PopScope(
+      onPopInvoked: (didPop) async {
+        _popScope();
+      },
       child: Material(
         color: widget.editorBackgroundColor == Colors.transparent
             ? Colors.black

@@ -7,7 +7,7 @@ import 'package:stories_editor/src/domain/providers/notifiers/control_provider.d
 import 'package:stories_editor/src/domain/providers/notifiers/text_editing_notifier.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  const TextFieldWidget({Key? key}) : super(key: key);
+  const TextFieldWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

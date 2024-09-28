@@ -8,7 +8,7 @@ import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/animated_onTap_button.dart';
 
 class AnimationSelector extends StatelessWidget {
-  const AnimationSelector({Key? key}) : super(key: key);
+  const AnimationSelector({super.key});
 
   @override
   Widget build(BuildContext context) {

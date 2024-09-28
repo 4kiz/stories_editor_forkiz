@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   share_plus: ^7.1.0
   permission_handler: ^10.0.0
-  image_picker: ^1.0.4
+  image_picker: ^1.1.2
 
   stories_editor:
     path: ../
