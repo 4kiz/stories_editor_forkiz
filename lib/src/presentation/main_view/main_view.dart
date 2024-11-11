@@ -165,7 +165,7 @@ class MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     final ScreenUtil screenUtil = ScreenUtil();
     return PopScope(
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, _) async {
         _popScope();
       },
       child: Material(
