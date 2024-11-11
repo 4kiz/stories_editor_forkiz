@@ -9,14 +9,13 @@ class ToolButton extends StatelessWidget {
   final Function()? onLongPress;
   final Color colorBorder;
   const ToolButton(
-      {Key? key,
+      {super.key,
       required this.onTap,
       required this.child,
       this.backGroundColor,
       this.padding,
       this.onLongPress,
-      this.colorBorder = Colors.white})
-      : super(key: key);
+      this.colorBorder = Colors.white});
 
   @override
   Widget build(BuildContext context) {

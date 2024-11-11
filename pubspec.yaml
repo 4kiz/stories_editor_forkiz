@@ -15,7 +15,7 @@ dependencies:
   # image
   image: ^4.0.17
   path_provider: ^2.0.11
-  photo_view: ^0.14.0
+  photo_view: ^0.15.0
   # with this ref fix `Looking up a deactivated widget's ancestor is unsafe`.
   #photo_view:
   #  git:
@@ -27,9 +27,9 @@ dependencies:
 
   # modal_gif_picker: ^0.0.2
   # painting
-  perfect_freehand: ^1.0.4
+  perfect_freehand: 1.0.4
   # positioning
-  align_positioned: ^3.0.0
+  align_positioned: 3.0.0
   #message
   fluttertoast: ^8.1.1
 
@@ -42,7 +42,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.3
+  flutter_lints: ^4.0.0
 
 flutter:
   assets:

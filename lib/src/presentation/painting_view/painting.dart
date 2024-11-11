@@ -14,7 +14,7 @@ import 'package:stories_editor/src/presentation/widgets/color_selector.dart';
 import 'package:stories_editor/src/presentation/widgets/size_slider_selector.dart';
 
 class Painting extends StatefulWidget {
-  const Painting({Key? key}) : super(key: key);
+  const Painting({super.key});
 
   @override
   State<Painting> createState() => _PaintingState();
@@ -155,13 +155,12 @@ class _PaintingState extends State<Painting> {
     /// return Painting board
     return Consumer2<ControlNotifier, PaintingNotifier>(
       builder: (context, controlNotifier, paintingNotifier, child) {
-        return WillPopScope(
-          onWillPop: () async {
+        return PopScope(
+          onPopInvoked: (didPop) async {
             controlNotifier.isPainting = false;
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               paintingNotifier.closeConnection();
             });
-            return true;
           },
           child: Scaffold(
             backgroundColor: Colors.transparent,

@@ -67,7 +67,7 @@ class _ExampleState extends State<Example> {
                   final picker = ImagePicker();
                   final image =
                       await picker.pickImage(source: ImageSource.gallery);
-                  if (mounted && image != null) {
+                  if (context.mounted && image != null) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

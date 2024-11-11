@@ -21,10 +21,10 @@ class TextEditor extends StatefulWidget {
   final BuildContext context;
   final int? colorDefaultOffsetIndex;
   const TextEditor({
-    Key? key,
+    super.key,
     required this.context,
     this.colorDefaultOffsetIndex,
-  }) : super(key: key);
+  });
 
   @override
   State<TextEditor> createState() => _TextEditorState();

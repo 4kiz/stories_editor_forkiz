@@ -21,14 +21,14 @@ class BottomTools extends StatefulWidget {
   /// editor background color
   final Color? editorBackgroundColor;
   const BottomTools({
-    Key? key,
+    super.key,
     required this.contentKey,
     required this.onDone,
     this.onDoneButtonStyle,
     this.editorBackgroundColor,
     this.onDoneButtonTitle,
     this.showAddImageButtonTitle,
-  }) : super(key: key);
+  });
 
   @override
   State<BottomTools> createState() => _BottomToolsState();
@@ -170,16 +170,16 @@ class _BottomToolsState extends State<BottomTools> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Consumer<LanguageProvider>(
-                                        builder: (context, provider, _) {
-                                          return Text(
-                                            widget.onDoneButtonTitle ?? provider.strings.post(),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          );
-                                        }
-                                      ),
+                                          builder: (context, provider, _) {
+                                        return Text(
+                                          widget.onDoneButtonTitle ??
+                                              provider.strings.post(),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        );
+                                      }),
                                       const Padding(
                                         padding: EdgeInsets.only(left: 5),
                                         child: Icon(

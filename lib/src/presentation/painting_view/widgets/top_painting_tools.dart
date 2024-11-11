@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -7,7 +9,7 @@ import 'package:stories_editor/src/presentation/utils/constants/app_enums.dart';
 import 'package:stories_editor/src/presentation/widgets/tool_button.dart';
 
 class TopPaintingTools extends StatefulWidget {
-  const TopPaintingTools({Key? key}) : super(key: key);
+  const TopPaintingTools({super.key});
 
   @override
   TopPaintingToolsState createState() => TopPaintingToolsState();
@@ -16,6 +18,7 @@ class TopPaintingTools extends StatefulWidget {
 class TopPaintingToolsState extends State<TopPaintingTools> {
   @override
   Widget build(BuildContext context) {
+    final isAndroid = Platform.isAndroid;
     return Consumer2<ControlNotifier, PaintingNotifier>(
       builder: (context, controlNotifier, paintingNotifier, child) {
         return Padding(
@@ -67,56 +70,58 @@ class TopPaintingToolsState extends State<TopPaintingTools> {
                 ),
 
                 /// select marker
-                ToolButton(
-                  onTap: () {
-                    paintingNotifier.paintingType = PaintingType.marker;
-                  },
-                  colorBorder:
-                      paintingNotifier.paintingType == PaintingType.marker
-                          ? Colors.black
-                          : Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  backGroundColor:
-                      paintingNotifier.paintingType == PaintingType.marker
-                          ? Colors.white.withOpacity(0.9)
-                          : Colors.black12,
-                  child: Transform.scale(
-                      scale: 1.2,
-                      child: ImageIcon(
-                        const AssetImage('assets/icons/marker.png',
-                            package: 'stories_editor'),
-                        color:
-                            paintingNotifier.paintingType == PaintingType.marker
-                                ? Colors.black
-                                : Colors.white,
-                      )),
-                ),
+                if (isAndroid) ...[
+                  ToolButton(
+                    onTap: () {
+                      paintingNotifier.paintingType = PaintingType.marker;
+                    },
+                    colorBorder:
+                        paintingNotifier.paintingType == PaintingType.marker
+                            ? Colors.black
+                            : Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    backGroundColor:
+                        paintingNotifier.paintingType == PaintingType.marker
+                            ? Colors.white.withOpacity(0.9)
+                            : Colors.black12,
+                    child: Transform.scale(
+                        scale: 1.2,
+                        child: ImageIcon(
+                          const AssetImage('assets/icons/marker.png',
+                              package: 'stories_editor'),
+                          color: paintingNotifier.paintingType ==
+                                  PaintingType.marker
+                              ? Colors.black
+                              : Colors.white,
+                        )),
+                  ),
 
-                /// select neon marker
-                ToolButton(
-                  onTap: () {
-                    paintingNotifier.paintingType = PaintingType.neon;
-                  },
-                  colorBorder:
-                      paintingNotifier.paintingType == PaintingType.neon
-                          ? Colors.black
-                          : Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  backGroundColor:
-                      paintingNotifier.paintingType == PaintingType.neon
-                          ? Colors.white.withOpacity(0.9)
-                          : Colors.black12,
-                  child: Transform.scale(
-                      scale: 1.1,
-                      child: ImageIcon(
-                        const AssetImage('assets/icons/neon.png',
-                            package: 'stories_editor'),
-                        color:
-                            paintingNotifier.paintingType == PaintingType.neon
-                                ? Colors.black
-                                : Colors.white,
-                      )),
-                ),
+                  /// select neon marker
+                  ToolButton(
+                    onTap: () {
+                      paintingNotifier.paintingType = PaintingType.neon;
+                    },
+                    colorBorder:
+                        paintingNotifier.paintingType == PaintingType.neon
+                            ? Colors.black
+                            : Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    backGroundColor:
+                        paintingNotifier.paintingType == PaintingType.neon
+                            ? Colors.white.withOpacity(0.9)
+                            : Colors.black12,
+                    child: Transform.scale(
+                        scale: 1.1,
+                        child: ImageIcon(
+                          const AssetImage('assets/icons/neon.png',
+                              package: 'stories_editor'),
+                          color:
+                              paintingNotifier.paintingType == PaintingType.neon
+                                  ? Colors.black
+                                  : Colors.white,
+                        )),
+                  ),
+                ],
 
                 /// done button
                 ToolButton(

@@ -67,7 +67,7 @@ class StoriesEditor extends StatefulWidget {
   final String? languageCode;
 
   const StoriesEditor({
-    Key? key,
+    super.key,
     required this.giphyKey,
     required this.onDone,
     this.middleBottomWidget,
@@ -86,7 +86,7 @@ class StoriesEditor extends StatefulWidget {
     this.colorDefaultOffsetIndex,
     this.placeholderColor,
     this.languageCode,
-  }) : super(key: key);
+  });
 
   @override
   StoriesEditorState createState() => StoriesEditorState();
