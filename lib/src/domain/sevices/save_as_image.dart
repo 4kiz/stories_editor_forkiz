@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:saver_gallery/saver_gallery.dart';
 
 Future takePicture(
     {required contentKey,
@@ -27,9 +27,13 @@ Future takePicture(
     await capturedFile.writeAsBytes(pngBytes);
 
     if (saveToGallery) {
-      final result = await ImageGallerySaver.saveImage(pngBytes,
-          quality: 100, name: "stories_creator${DateTime.now()}.png");
-      if (result != null) {
+      final result = await SaverGallery.saveImage(
+        pngBytes,
+        fileName: "stories_creator${DateTime.now()}.png",
+        skipIfExists: false,
+        quality: 100,
+      );
+      if (result.isSuccess) {
         return true;
       } else {
         return false;
