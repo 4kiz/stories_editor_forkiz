@@ -54,6 +54,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    namespace 'dev.camilo.flutter.stories_editor.example.example'
 }
 
 flutter {
