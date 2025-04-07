@@ -166,6 +166,9 @@ class MainViewState extends State<MainView> {
     final ScreenUtil screenUtil = ScreenUtil();
     return PopScope(
       onPopInvokedWithResult: (didPop, _) async {
+        if (didPop) {
+          return;
+        }
         _popScope();
       },
       child: Material(
